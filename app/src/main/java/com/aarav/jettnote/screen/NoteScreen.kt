@@ -32,13 +32,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.aarav.jettnote.components.NoteInputText
 import com.aarav.jettnote.R
+import com.aarav.jettnote.components.NoteInputText
 import com.aarav.jettnote.model.Note
 import com.aarav.jettnote.components.noteButton
-import java.text.SimpleDateFormat
-import java.time.Instant
-import java.util.Date
+import com.aarav.jettnote.util.formatDate
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
@@ -99,7 +97,7 @@ fun NoteScreen(
         }
         Divider(modifier = Modifier.padding(5.dp))
 
-        LazyColumn() {
+        LazyColumn {
             items(notes) { note ->
                 NoteRow(note = note, onNoteClick = {
                     onRemoveNote(it)
@@ -130,6 +128,12 @@ fun NoteRow(
                 .padding(5.dp), horizontalAlignment = Alignment.Start) {
             Text(text = note.title, style = MaterialTheme.typography.titleMedium)
             Text(text = note.description, style = MaterialTheme.typography.bodySmall)
+
+            Column(horizontalAlignment = Alignment.End) {
+                Text(
+                    text = formatDate(note.entryDate.time),
+                    style = MaterialTheme.typography.labelSmall)
+            }
 
         }
     }
