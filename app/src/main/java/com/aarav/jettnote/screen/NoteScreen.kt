@@ -30,9 +30,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.aarav.jettnote.R
 import com.aarav.jettnote.components.NoteInputText
 import com.aarav.jettnote.model.Note
 import com.aarav.jettnote.components.noteButton
@@ -57,7 +56,7 @@ fun NoteScreen(
     // content
     Column(modifier = Modifier.padding(8.dp)) {
         TopAppBar(title = {
-            Text(text = stringResource(id = R.string.app_name), color = Color.Black)
+            Text(text = "JettNote", color = Color.Black)
         }, actions = {
             Icon(
                 imageVector = Icons.Rounded.Notifications,
@@ -126,14 +125,19 @@ fun NoteRow(
                     onNoteClick(note)
                 }
                 .padding(5.dp), horizontalAlignment = Alignment.Start) {
-            Text(text = note.title, style = MaterialTheme.typography.titleMedium)
-            Text(text = note.description, style = MaterialTheme.typography.bodySmall)
+            Text(
+                text = note.title,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Text(
+                text = note.description,
+                style = MaterialTheme.typography.bodySmall
+            )
+            Text(
+                text = "\t\t\t\t\t\t\t\t\t\t"+formatDate(note.entryDate.time),
+                style = MaterialTheme.typography.labelSmall
+            )
 
-            Column(horizontalAlignment = Alignment.End) {
-                Text(
-                    text = formatDate(note.entryDate.time),
-                    style = MaterialTheme.typography.labelSmall)
-            }
 
         }
     }
